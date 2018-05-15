@@ -11,11 +11,15 @@ def normalize_whitespace(str):
     import re
     str = str.strip()
     str = re.sub(r'\s+', ' ', str)
+    
     return str
 class CvlacSpider(scrapy.Spider):
     name = 'cvlac'
     allowed_domains = ['http://scienti.colciencias.gov.co:8081/cvlac']
-    start_urls = ['http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000171220'] 
+    start_urls = [] 
+    for i in range(10):
+        url = 'http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000000000'
+        start_urls.append(url[0:len(url)-len(str(i))]+str(i))
     def parse(self, response):
         tabla = response.css('table')[1]       
         datos=[]
