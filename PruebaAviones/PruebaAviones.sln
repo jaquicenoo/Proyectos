@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaAviones", "PruebaAviones\PruebaAviones.csproj", "{C5467698-865F-49E4-B5F5-6FF71A723BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestVuelos", "RestVuelos\RestVuelos.csproj", "{72140AA6-A09E-415A-85A0-2F29AC8B3DE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5467698-865F-49E4-B5F5-6FF71A723BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5467698-865F-49E4-B5F5-6FF71A723BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5467698-865F-49E4-B5F5-6FF71A723BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5467698-865F-49E4-B5F5-6FF71A723BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72140AA6-A09E-415A-85A0-2F29AC8B3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72140AA6-A09E-415A-85A0-2F29AC8B3DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72140AA6-A09E-415A-85A0-2F29AC8B3DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72140AA6-A09E-415A-85A0-2F29AC8B3DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66C30FC2-F9B9-47C5-A485-A81BB4F5AA8B}
+	EndGlobalSection
+EndGlobal

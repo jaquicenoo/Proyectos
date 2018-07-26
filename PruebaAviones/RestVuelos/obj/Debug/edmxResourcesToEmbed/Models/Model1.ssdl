@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaAvionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aerolineas">
+    <Key>
+      <PropertyRef Name="IdAerolinea" />
+    </Key>
+    <Property Name="IdAerolinea" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NombreAerolinea" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdCiudad" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NombreCiudad" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="IdEstado" />
+    </Key>
+    <Property Name="IdEstado" Type="int" Nullable="false" />
+    <Property Name="NombreEstado" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Vuelos">
+    <Key>
+      <PropertyRef Name="IdRegistro" />
+    </Key>
+    <Property Name="IdRegistro" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IdCiudadOrigen" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IdCiudadDestino" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="HoraSalida" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HoraLlegada" Type="time" Precision="7" Nullable="false" />
+    <Property Name="NumeroVuelo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdAerolinea" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IdEstadoVuelo" Type="int" Nullable="false" />
+    <Property Name="TipoVuelo" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VuelosEntrantes">
+    <Key>
+      <PropertyRef Name="NumeroVuelo" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="HoraSalida" />
+      <PropertyRef Name="HoraLlegada" />
+    </Key>
+    <Property Name="NumeroVuelo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="100" />
+    <Property Name="CiudadDestino" Type="nvarchar" MaxLength="100" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="HoraSalida" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HoraLlegada" Type="time" Precision="7" Nullable="false" />
+    <Property Name="NombreAerolinea" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Vuelos_Aerolineas">
+    <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aerolineas">
+        <PropertyRef Name="IdAerolinea" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdAerolinea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdCiudadDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="IdEstado" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdEstadoVuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PruebaAvionesModelStoreContainer">
+    <EntitySet Name="Aerolineas" EntityType="Self.Aerolineas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vuelos" EntityType="Self.Vuelos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VuelosEntrantes].[NumeroVuelo] AS [NumeroVuelo], 
+    [VuelosEntrantes].[CiudadOrigen] AS [CiudadOrigen], 
+    [VuelosEntrantes].[CiudadDestino] AS [CiudadDestino], 
+    [VuelosEntrantes].[Fecha] AS [Fecha], 
+    [VuelosEntrantes].[HoraSalida] AS [HoraSalida], 
+    [VuelosEntrantes].[HoraLlegada] AS [HoraLlegada], 
+    [VuelosEntrantes].[NombreAerolinea] AS [NombreAerolinea]
+    FROM [dbo].[VuelosEntrantes] AS [VuelosEntrantes]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
+      <End Role="Aerolineas" EntitySet="Aerolineas" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Ciudades" Association="Self.FK_Vuelos_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Estados" Association="Self.FK_Vuelos_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

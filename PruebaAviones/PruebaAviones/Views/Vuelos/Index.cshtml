@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PruebaAviones.Models.VuelosModelo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroVuelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiudadOrigen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiudadDestino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraLlegada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreAerolinea)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroVuelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CiudadOrigen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CiudadDestino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraLlegada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreAerolinea)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

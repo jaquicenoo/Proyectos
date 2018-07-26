@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PruebaAvionesModelStoreContainer" CdmEntityContainer="PruebaAvionesEntities">
+    <EntitySetMapping Name="Aerolineas">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.Aerolineas">
+        <MappingFragment StoreEntitySet="Aerolineas">
+          <ScalarProperty Name="IdAerolinea" ColumnName="IdAerolinea" />
+          <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ciudades">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.Ciudades">
+        <MappingFragment StoreEntitySet="Ciudades">
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="NombreCiudad" ColumnName="NombreCiudad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estados">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.Estados">
+        <MappingFragment StoreEntitySet="Estados">
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vuelos">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.Vuelos">
+        <MappingFragment StoreEntitySet="Vuelos">
+          <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+          <ScalarProperty Name="IdCiudadOrigen" ColumnName="IdCiudadOrigen" />
+          <ScalarProperty Name="IdCiudadDestino" ColumnName="IdCiudadDestino" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+          <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+          <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+          <ScalarProperty Name="IdAerolinea" ColumnName="IdAerolinea" />
+          <ScalarProperty Name="IdEstadoVuelo" ColumnName="IdEstadoVuelo" />
+          <ScalarProperty Name="TipoVuelo" ColumnName="TipoVuelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VuelosEntrantes">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.VuelosEntrantes">
+        <MappingFragment StoreEntitySet="VuelosEntrantes">
+          <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+          <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+          <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+          <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+          <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

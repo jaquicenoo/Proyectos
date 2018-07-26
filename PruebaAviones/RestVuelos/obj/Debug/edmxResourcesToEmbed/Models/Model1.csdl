@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaAvionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aerolineas">
+    <Key>
+      <PropertyRef Name="IdAerolinea" />
+    </Key>
+    <Property Name="IdAerolinea" Type="Guid" Nullable="false" />
+    <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Aerolineas" FromRole="Aerolineas" ToRole="Vuelos" />
+  </EntityType>
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdCiudad" Type="Guid" Nullable="false" />
+    <Property Name="NombreCiudad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Ciudades" FromRole="Ciudades" ToRole="Vuelos" />
+  </EntityType>
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="IdEstado" />
+    </Key>
+    <Property Name="IdEstado" Type="Int32" Nullable="false" />
+    <Property Name="NombreEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Estados" FromRole="Estados" ToRole="Vuelos" />
+  </EntityType>
+  <EntityType Name="Vuelos">
+    <Key>
+      <PropertyRef Name="IdRegistro" />
+    </Key>
+    <Property Name="IdRegistro" Type="Guid" Nullable="false" />
+    <Property Name="IdCiudadOrigen" Type="Guid" Nullable="false" />
+    <Property Name="IdCiudadDestino" Type="Guid" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="NumeroVuelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdAerolinea" Type="Guid" Nullable="false" />
+    <Property Name="IdEstadoVuelo" Type="Int32" Nullable="false" />
+    <Property Name="TipoVuelo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Aerolineas" Relationship="Self.FK_Vuelos_Aerolineas" FromRole="Vuelos" ToRole="Aerolineas" />
+    <NavigationProperty Name="Ciudades" Relationship="Self.FK_Vuelos_Ciudades" FromRole="Vuelos" ToRole="Ciudades" />
+    <NavigationProperty Name="Estados" Relationship="Self.FK_Vuelos_Estados" FromRole="Vuelos" ToRole="Estados" />
+  </EntityType>
+  <EntityType Name="VuelosEntrantes">
+    <Key>
+      <PropertyRef Name="NumeroVuelo" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="HoraSalida" />
+      <PropertyRef Name="HoraLlegada" />
+    </Key>
+    <Property Name="NumeroVuelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CiudadOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CiudadDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Vuelos_Aerolineas">
+    <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aerolineas">
+        <PropertyRef Name="IdAerolinea" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdAerolinea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdCiudadDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="IdEstado" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="IdEstadoVuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PruebaAvionesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aerolineas" EntityType="Self.Aerolineas" />
+    <EntitySet Name="Ciudades" EntityType="Self.Ciudades" />
+    <EntitySet Name="Estados" EntityType="Self.Estados" />
+    <EntitySet Name="Vuelos" EntityType="Self.Vuelos" />
+    <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" />
+    <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
+      <End Role="Aerolineas" EntitySet="Aerolineas" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Ciudades" Association="Self.FK_Vuelos_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Estados" Association="Self.FK_Vuelos_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
