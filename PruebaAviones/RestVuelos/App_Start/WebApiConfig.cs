@@ -15,15 +15,35 @@ namespace RestVuelos
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+            name: "ValidarUsuario",
+            routeTemplate: "api/Usuarios/ValidarUsuario",
+            defaults: new { controller = "Usuarios", action = "ValidarUsuario" }
             );
-           config.Routes.MapHttpRoute(
-                name: "VuelosEntrantes",
-                routeTemplate: "api/Vuelos/VuelosEntrantes",
-                defaults: new { controller = "Vuelos", action = "GetVuelosEntrantes", id = RouteParameter.Optional }
-        );
+            config.Routes.MapHttpRoute(
+            name: "PostUsuarios",
+            routeTemplate: "api/Usuarios/PostUsuarios",
+            defaults: new { controller = "Usuarios", action = "PostUsuarios" }
+            );
+            config.Routes.MapHttpRoute(
+                name: "GetAllVuelos",
+                routeTemplate: "api/Vuelos/GetAllVuelos",
+                defaults: new { controller = "Vuelos", action = "GetAllVuelos"}
+             );
+            config.Routes.MapHttpRoute(
+                name: "GetVuelo",
+                routeTemplate: "api/Vuelos/GetVuelo/{id}",
+                defaults: new { controller = "Vuelos", action = "GetVuelo", id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                name: "GetAllAerolineas",
+                routeTemplate: "api/Vuelos/GetAllAerolineas",
+                defaults: new { controller = "Vuelos", action = "GetAllAerolineas"}
+             );
+            config.Routes.MapHttpRoute(
+                name: "GetAllCiudades",
+                routeTemplate: "api/Vuelos/GetAllCiudades",
+                defaults: new { controller = "Vuelos", action = "GetAllCiudades" }
+            );
         }
     }
 }

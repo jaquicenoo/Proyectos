@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Mvc;
+using Newtonsoft.Json;
 using RestVuelos.Models;
 
 namespace RestVuelos.Controllers
@@ -23,13 +25,13 @@ namespace RestVuelos.Controllers
         //}
 
         // GET: api/Vuelos/5
-        [ResponseType(typeof(VuelosEntrantes))]
-        public IHttpActionResult GetVuelosEntrantes()
+        [ResponseType(typeof(GetAllVuelos))]
+        public IHttpActionResult GetAllVuelos()
         {
-            List<VuelosEntrantes> vuelos;
+            List<GetAllVuelos> vuelos;
             using (PruebaAvionesEntities dbContex = new PruebaAvionesEntities())
             {
-                vuelos = dbContex.VuelosEntrantes.ToList();
+                vuelos = dbContex.GetAllVuelos.ToList();
             }
             if (vuelos == null)
             {
@@ -38,7 +40,58 @@ namespace RestVuelos.Controllers
 
             return Ok(vuelos);
         }
+        [ResponseType(typeof(GetAllVuelos))]
+        public IHttpActionResult GetVuelo(Guid Id)
+        {
+            GetAllVuelos vuelos;
+            using (PruebaAvionesEntities dbContex = new PruebaAvionesEntities())
+            {
+                vuelos = dbContex.GetAllVuelos.Where(X=> X.IdRegistro==Id).FirstOrDefault();
+            }
+            if (vuelos == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(vuelos);
+        }
+        [ResponseType(typeof(List<Aerolinea>))]
+        public IHttpActionResult GetAllAerolineas()
+        {
+            List<Aerolinea> Aerolinea;
+            using (PruebaAvionesEntities dbContex = new PruebaAvionesEntities())
+            {
+               Aerolinea = dbContex.Aerolineas.Select(x=> new Aerolinea {
+               NombreAerolinea = x.NombreAerolinea,
+               IdAerolinea = x.IdAerolinea
+               } ).ToList();              
+            }
+            if (Aerolinea == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Aerolinea);
+        }
+        [ResponseType(typeof(List<Ciudad>))]
+        public IHttpActionResult GetAllCiudades()
+        {
+            List<Ciudad> LAerolinea;
+            using (PruebaAvionesEntities dbContex = new PruebaAvionesEntities())
+            {
+                LAerolinea = dbContex.Ciudades.Select(x => new Ciudad
+                {
+                    NombreCiudad = x.NombreCiudad,
+                    IdCiudad = x.IdCiudad
+                }).ToList();
+            }
+            if (LAerolinea == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(LAerolinea);
+        }
         // PUT: api/Vuelos/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVuelos(Guid id, Vuelos vuelos)
@@ -119,7 +172,6 @@ namespace RestVuelos.Controllers
 
             return Ok(vuelos);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

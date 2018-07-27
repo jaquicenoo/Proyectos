@@ -21,6 +21,14 @@
     <Property Name="IdEstado" Type="int" Nullable="false" />
     <Property Name="NombreEstado" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuarios" />
+    </Key>
+    <Property Name="usuario" Type="nvarchar" MaxLength="250" />
+    <Property Name="contraseña" Type="nvarchar" MaxLength="250" />
+    <Property Name="IdUsuarios" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <EntityType Name="Vuelos">
     <Key>
       <PropertyRef Name="IdRegistro" />
@@ -37,14 +45,17 @@
     <Property Name="TipoVuelo" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="VuelosEntrantes">
+advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GetAllVuelos">
     <Key>
+      <PropertyRef Name="IdRegistro" />
       <PropertyRef Name="NumeroVuelo" />
       <PropertyRef Name="Fecha" />
       <PropertyRef Name="HoraSalida" />
       <PropertyRef Name="HoraLlegada" />
+      <PropertyRef Name="TipoVuelo" />
     </Key>
+    <Property Name="IdRegistro" Type="uniqueidentifier" Nullable="false" />
     <Property Name="NumeroVuelo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="100" />
     <Property Name="CiudadDestino" Type="nvarchar" MaxLength="100" />
@@ -52,6 +63,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
     <Property Name="HoraSalida" Type="time" Precision="7" Nullable="false" />
     <Property Name="HoraLlegada" Type="time" Precision="7" Nullable="false" />
     <Property Name="NombreAerolinea" Type="nvarchar" MaxLength="100" />
+    <Property Name="TipoVuelo" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Vuelos_Aerolineas">
     <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
@@ -93,17 +105,20 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
     <EntitySet Name="Aerolineas" EntityType="Self.Aerolineas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vuelos" EntityType="Self.Vuelos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="GetAllVuelos" EntityType="Self.GetAllVuelos" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [VuelosEntrantes].[NumeroVuelo] AS [NumeroVuelo], 
-    [VuelosEntrantes].[CiudadOrigen] AS [CiudadOrigen], 
-    [VuelosEntrantes].[CiudadDestino] AS [CiudadDestino], 
-    [VuelosEntrantes].[Fecha] AS [Fecha], 
-    [VuelosEntrantes].[HoraSalida] AS [HoraSalida], 
-    [VuelosEntrantes].[HoraLlegada] AS [HoraLlegada], 
-    [VuelosEntrantes].[NombreAerolinea] AS [NombreAerolinea]
-    FROM [dbo].[VuelosEntrantes] AS [VuelosEntrantes]</DefiningQuery>
+    [GetAllVuelos].[IdRegistro] AS [IdRegistro], 
+    [GetAllVuelos].[NumeroVuelo] AS [NumeroVuelo], 
+    [GetAllVuelos].[CiudadOrigen] AS [CiudadOrigen], 
+    [GetAllVuelos].[CiudadDestino] AS [CiudadDestino], 
+    [GetAllVuelos].[Fecha] AS [Fecha], 
+    [GetAllVuelos].[HoraSalida] AS [HoraSalida], 
+    [GetAllVuelos].[HoraLlegada] AS [HoraLlegada], 
+    [GetAllVuelos].[NombreAerolinea] AS [NombreAerolinea], 
+    [GetAllVuelos].[TipoVuelo] AS [TipoVuelo]
+    FROM [dbo].[GetAllVuelos] AS [GetAllVuelos]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
       <End Role="Aerolineas" EntitySet="Aerolineas" />

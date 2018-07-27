@@ -41,16 +41,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VuelosEntrantes">
-      <EntityTypeMapping TypeName="PruebaAvionesModel.VuelosEntrantes">
-        <MappingFragment StoreEntitySet="VuelosEntrantes">
-          <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
-          <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
-          <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
-          <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+    <EntitySetMapping Name="GetAllVuelos">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.GetAllVuelos">
+        <MappingFragment StoreEntitySet="GetAllVuelos">
+          <ScalarProperty Name="TipoVuelo" ColumnName="TipoVuelo" />
           <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
+          <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+          <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
+          <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+          <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+          <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="PruebaAvionesModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuarios" ColumnName="IdUsuarios" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

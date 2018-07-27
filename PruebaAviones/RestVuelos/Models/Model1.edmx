@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PruebaAvionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PruebaAvionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aerolineas">
           <Key>
             <PropertyRef Name="IdAerolinea" />
@@ -26,6 +26,14 @@
           <Property Name="IdEstado" Type="int" Nullable="false" />
           <Property Name="NombreEstado" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuarios" />
+          </Key>
+          <Property Name="usuario" Type="nvarchar" MaxLength="250" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="250" />
+          <Property Name="IdUsuarios" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Vuelos">
           <Key>
             <PropertyRef Name="IdRegistro" />
@@ -42,14 +50,17 @@
           <Property Name="TipoVuelo" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="VuelosEntrantes">
+advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="GetAllVuelos">
           <Key>
+            <PropertyRef Name="IdRegistro" />
             <PropertyRef Name="NumeroVuelo" />
             <PropertyRef Name="Fecha" />
             <PropertyRef Name="HoraSalida" />
             <PropertyRef Name="HoraLlegada" />
+            <PropertyRef Name="TipoVuelo" />
           </Key>
+          <Property Name="IdRegistro" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NumeroVuelo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CiudadOrigen" Type="nvarchar" MaxLength="100" />
           <Property Name="CiudadDestino" Type="nvarchar" MaxLength="100" />
@@ -57,6 +68,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
           <Property Name="HoraSalida" Type="time" Precision="7" Nullable="false" />
           <Property Name="HoraLlegada" Type="time" Precision="7" Nullable="false" />
           <Property Name="NombreAerolinea" Type="nvarchar" MaxLength="100" />
+          <Property Name="TipoVuelo" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Vuelos_Aerolineas">
           <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
@@ -98,17 +110,20 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
           <EntitySet Name="Aerolineas" EntityType="Self.Aerolineas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vuelos" EntityType="Self.Vuelos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="GetAllVuelos" EntityType="Self.GetAllVuelos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [VuelosEntrantes].[NumeroVuelo] AS [NumeroVuelo], 
-    [VuelosEntrantes].[CiudadOrigen] AS [CiudadOrigen], 
-    [VuelosEntrantes].[CiudadDestino] AS [CiudadDestino], 
-    [VuelosEntrantes].[Fecha] AS [Fecha], 
-    [VuelosEntrantes].[HoraSalida] AS [HoraSalida], 
-    [VuelosEntrantes].[HoraLlegada] AS [HoraLlegada], 
-    [VuelosEntrantes].[NombreAerolinea] AS [NombreAerolinea]
-    FROM [dbo].[VuelosEntrantes] AS [VuelosEntrantes]</DefiningQuery>
+    [GetAllVuelos].[IdRegistro] AS [IdRegistro], 
+    [GetAllVuelos].[NumeroVuelo] AS [NumeroVuelo], 
+    [GetAllVuelos].[CiudadOrigen] AS [CiudadOrigen], 
+    [GetAllVuelos].[CiudadDestino] AS [CiudadDestino], 
+    [GetAllVuelos].[Fecha] AS [Fecha], 
+    [GetAllVuelos].[HoraSalida] AS [HoraSalida], 
+    [GetAllVuelos].[HoraLlegada] AS [HoraLlegada], 
+    [GetAllVuelos].[NombreAerolinea] AS [NombreAerolinea], 
+    [GetAllVuelos].[TipoVuelo] AS [TipoVuelo]
+    FROM [dbo].[GetAllVuelos] AS [GetAllVuelos]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
             <End Role="Aerolineas" EntitySet="Aerolineas" />
@@ -123,8 +138,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PruebaAvionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -170,21 +184,6 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
           <NavigationProperty Name="Ciudades" Relationship="Self.FK_Vuelos_Ciudades" FromRole="Vuelos" ToRole="Ciudades" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_Vuelos_Estados" FromRole="Vuelos" ToRole="Estados" />
         </EntityType>
-        <EntityType Name="VuelosEntrantes">
-          <Key>
-            <PropertyRef Name="NumeroVuelo" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="HoraSalida" />
-            <PropertyRef Name="HoraLlegada" />
-          </Key>
-          <Property Name="NumeroVuelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CiudadOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CiudadDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <Association Name="FK_Vuelos_Aerolineas">
           <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
           <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
@@ -226,7 +225,6 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" />
           <EntitySet Name="Estados" EntityType="Self.Estados" />
           <EntitySet Name="Vuelos" EntityType="Self.Vuelos" />
-          <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" />
           <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
             <End Role="Aerolineas" EntitySet="Aerolineas" />
             <End Role="Vuelos" EntitySet="Vuelos" />
@@ -239,7 +237,36 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
+          <EntitySet Name="GetAllVuelos" EntityType="PruebaAvionesModel.GetAllVuelos" />
+          <EntitySet Name="Usuarios" EntityType="PruebaAvionesModel.Usuarios" />
         </EntityContainer>
+        <EntityType Name="GetAllVuelos">
+          <Key>
+            <PropertyRef Name="IdRegistro" />
+            <PropertyRef Name="NumeroVuelo" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="HoraSalida" />
+            <PropertyRef Name="HoraLlegada" />
+            <PropertyRef Name="TipoVuelo" />
+          </Key>
+          <Property Name="IdRegistro" Type="Guid" Nullable="false" />
+          <Property Name="NumeroVuelo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CiudadOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CiudadDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TipoVuelo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuarios" />
+          </Key>
+          <Property Name="usuario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="contraseña" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdUsuarios" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -286,16 +313,27 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.VuelosEntrantes' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VuelosEntrantes">
-            <EntityTypeMapping TypeName="PruebaAvionesModel.VuelosEntrantes">
-              <MappingFragment StoreEntitySet="VuelosEntrantes">
-                <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
-                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
-                <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
-                <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+          <EntitySetMapping Name="GetAllVuelos">
+            <EntityTypeMapping TypeName="PruebaAvionesModel.GetAllVuelos">
+              <MappingFragment StoreEntitySet="GetAllVuelos">
+                <ScalarProperty Name="TipoVuelo" ColumnName="TipoVuelo" />
                 <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
+                <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CiudadDestino" ColumnName="CiudadDestino" />
+                <ScalarProperty Name="CiudadOrigen" ColumnName="CiudadOrigen" />
+                <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="PruebaAvionesModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuarios" ColumnName="IdUsuarios" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

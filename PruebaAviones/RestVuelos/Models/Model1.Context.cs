@@ -29,6 +29,7 @@ namespace RestVuelos.Models
         public virtual DbSet<Ciudades> Ciudades { get; set; }
         public virtual DbSet<Estados> Estados { get; set; }
         public virtual DbSet<Vuelos> Vuelos { get; set; }
-        public virtual DbSet<VuelosEntrantes> VuelosEntrantes { get; set; }
+        public virtual DbSet<GetAllVuelos> GetAllVuelos { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

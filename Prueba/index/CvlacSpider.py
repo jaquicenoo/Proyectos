@@ -17,7 +17,7 @@ class CvlacSpider(scrapy.Spider):
     name = 'cvlac'
     allowed_domains = ['http://scienti.colciencias.gov.co:8081/cvlac']
     start_urls = [] 
-    for i in range(10):
+    for i in range(10000):
         url = 'http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000000000'
         start_urls.append(url[0:len(url)-len(str(i))]+str(i))
     def parse(self, response):
@@ -26,7 +26,7 @@ class CvlacSpider(scrapy.Spider):
         for i in tabla.css('td::text').extract():
             datos.append(normalize_whitespace(i))
         yield {
-        'categoria':datos[datos.index('Categoría')+1],
+        #'categoria':datos[datos.index('Categoría')+1],
         'nombre':datos[datos.index('Nombre')+1],
         'nombrecitaciones':datos[datos.index('Nombre en citaciones')+1],
         'nacionalidad':datos[datos.index('Nacionalidad')+1],

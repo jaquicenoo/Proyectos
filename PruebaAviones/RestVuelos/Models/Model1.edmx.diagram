@@ -7,12 +7,13 @@
       <Diagram DiagramId="9de6f65177f04452bb9f763662a1489f" Name="Diagram1">
         <EntityTypeShape EntityType="PruebaAvionesModel.Aerolineas" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="PruebaAvionesModel.Ciudades" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PruebaAvionesModel.Estados" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PruebaAvionesModel.Estados" Width="1.5" PointX="4.25" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PruebaAvionesModel.Vuelos" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PruebaAvionesModel.VuelosEntrantes" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="PruebaAvionesModel.FK_Vuelos_Aerolineas" ManuallyRouted="false" />
         <AssociationConnector Association="PruebaAvionesModel.FK_Vuelos_Ciudades" ManuallyRouted="false" />
         <AssociationConnector Association="PruebaAvionesModel.FK_Vuelos_Estados" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PruebaAvionesModel.GetAllVuelos" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PruebaAvionesModel.Usuarios" Width="1.5" PointX="6.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,15 +17,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand">Vuelos APP</a>
             </div>
-            <div class="navbar-collapse collapse">
+            @using(Html.BeginForm("LogOff", "Usuarios",FormMethod.Post,new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                 @Html.AntiForgeryToken()
+             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@User.Identity.Name</li>
                 </ul>
             </div>
+            }
         </div>
     </div>
     <div class="container body-content">

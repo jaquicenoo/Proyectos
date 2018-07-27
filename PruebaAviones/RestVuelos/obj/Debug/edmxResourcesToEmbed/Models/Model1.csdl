@@ -42,21 +42,6 @@
     <NavigationProperty Name="Ciudades" Relationship="Self.FK_Vuelos_Ciudades" FromRole="Vuelos" ToRole="Ciudades" />
     <NavigationProperty Name="Estados" Relationship="Self.FK_Vuelos_Estados" FromRole="Vuelos" ToRole="Estados" />
   </EntityType>
-  <EntityType Name="VuelosEntrantes">
-    <Key>
-      <PropertyRef Name="NumeroVuelo" />
-      <PropertyRef Name="Fecha" />
-      <PropertyRef Name="HoraSalida" />
-      <PropertyRef Name="HoraLlegada" />
-    </Key>
-    <Property Name="NumeroVuelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CiudadOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="CiudadDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-  </EntityType>
   <Association Name="FK_Vuelos_Aerolineas">
     <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
     <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
@@ -98,7 +83,6 @@
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" />
     <EntitySet Name="Estados" EntityType="Self.Estados" />
     <EntitySet Name="Vuelos" EntityType="Self.Vuelos" />
-    <EntitySet Name="VuelosEntrantes" EntityType="Self.VuelosEntrantes" />
     <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
       <End Role="Aerolineas" EntitySet="Aerolineas" />
       <End Role="Vuelos" EntitySet="Vuelos" />
@@ -111,5 +95,34 @@
       <End Role="Estados" EntitySet="Estados" />
       <End Role="Vuelos" EntitySet="Vuelos" />
     </AssociationSet>
+    <EntitySet Name="GetAllVuelos" EntityType="PruebaAvionesModel.GetAllVuelos" />
+    <EntitySet Name="Usuarios" EntityType="PruebaAvionesModel.Usuarios" />
   </EntityContainer>
+  <EntityType Name="GetAllVuelos">
+    <Key>
+      <PropertyRef Name="IdRegistro" />
+      <PropertyRef Name="NumeroVuelo" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="HoraSalida" />
+      <PropertyRef Name="HoraLlegada" />
+      <PropertyRef Name="TipoVuelo" />
+    </Key>
+    <Property Name="IdRegistro" Type="Guid" Nullable="false" />
+    <Property Name="NumeroVuelo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CiudadOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CiudadDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HoraSalida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TipoVuelo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuarios" />
+    </Key>
+    <Property Name="usuario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="contraseña" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IdUsuarios" Type="Guid" Nullable="false" />
+  </EntityType>
 </Schema>
