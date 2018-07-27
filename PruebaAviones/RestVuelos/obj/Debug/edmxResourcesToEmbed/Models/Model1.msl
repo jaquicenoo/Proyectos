@@ -44,6 +44,7 @@
     <EntitySetMapping Name="GetAllVuelos">
       <EntityTypeMapping TypeName="PruebaAvionesModel.GetAllVuelos">
         <MappingFragment StoreEntitySet="GetAllVuelos">
+          <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
           <ScalarProperty Name="TipoVuelo" ColumnName="TipoVuelo" />
           <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
           <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />

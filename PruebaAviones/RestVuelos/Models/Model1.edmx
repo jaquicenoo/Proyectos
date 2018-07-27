@@ -69,6 +69,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene def
           <Property Name="HoraLlegada" Type="time" Precision="7" Nullable="false" />
           <Property Name="NombreAerolinea" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoVuelo" Type="bit" Nullable="false" />
+          <Property Name="NombreEstado" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Vuelos_Aerolineas">
           <End Role="Aerolineas" Type="Self.Aerolineas" Multiplicity="1" />
@@ -122,7 +123,8 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene def
     [GetAllVuelos].[HoraSalida] AS [HoraSalida], 
     [GetAllVuelos].[HoraLlegada] AS [HoraLlegada], 
     [GetAllVuelos].[NombreAerolinea] AS [NombreAerolinea], 
-    [GetAllVuelos].[TipoVuelo] AS [TipoVuelo]
+    [GetAllVuelos].[TipoVuelo] AS [TipoVuelo], 
+    [GetAllVuelos].[NombreEstado] AS [NombreEstado]
     FROM [dbo].[GetAllVuelos] AS [GetAllVuelos]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Vuelos_Aerolineas" Association="Self.FK_Vuelos_Aerolineas">
@@ -258,6 +260,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene def
           <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
           <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TipoVuelo" Type="Boolean" Nullable="false" />
+          <Property Name="NombreEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -316,6 +319,7 @@ advertencia 6002: La tabla o vista 'PruebaAviones.dbo.GetAllVuelos' no tiene def
           <EntitySetMapping Name="GetAllVuelos">
             <EntityTypeMapping TypeName="PruebaAvionesModel.GetAllVuelos">
               <MappingFragment StoreEntitySet="GetAllVuelos">
+                <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
                 <ScalarProperty Name="TipoVuelo" ColumnName="TipoVuelo" />
                 <ScalarProperty Name="NombreAerolinea" ColumnName="NombreAerolinea" />
                 <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />

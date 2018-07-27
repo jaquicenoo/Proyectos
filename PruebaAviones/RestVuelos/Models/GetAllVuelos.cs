@@ -23,5 +23,6 @@ namespace RestVuelos.Models
         public System.TimeSpan HoraLlegada { get; set; }
         public string NombreAerolinea { get; set; }
         public bool TipoVuelo { get; set; }
+        public string NombreEstado { get; set; }
     }
 }

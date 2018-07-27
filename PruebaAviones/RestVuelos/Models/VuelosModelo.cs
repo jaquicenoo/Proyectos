@@ -18,4 +18,9 @@ namespace RestVuelos.Models
         public System.Guid IdAerolinea { get; set; }
         public string NombreAerolinea { get; set; }
     }
+    public class Estado
+    {
+        public int IdEstado { get; set; }
+        public string NombreEstado { get; set; }
+    }
 }

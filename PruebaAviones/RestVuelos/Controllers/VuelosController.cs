@@ -92,20 +92,33 @@ namespace RestVuelos.Controllers
 
             return Ok(LAerolinea);
         }
+        [ResponseType(typeof(List<Estado>))]
+        public IHttpActionResult GetAllEstados()
+        {
+            List<Estado> LEstados;
+            using (PruebaAvionesEntities dbContex = new PruebaAvionesEntities())
+            {
+                LEstados = dbContex.Estados.Select(x => new Estado
+                {
+                    NombreEstado = x.NombreEstado,
+                    IdEstado = x.IdEstado
+                }).ToList();
+            }
+            if (LEstados == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(LEstados);
+        }
         // PUT: api/Vuelos/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutVuelos(Guid id, Vuelos vuelos)
+        [ResponseType(typeof(HttpStatusCode))]
+        public IHttpActionResult PutVuelos(Vuelos vuelos)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != vuelos.IdRegistro)
-            {
-                return BadRequest();
-            }
-
             db.Entry(vuelos).State = EntityState.Modified;
 
             try
@@ -114,17 +127,9 @@ namespace RestVuelos.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VuelosExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST: api/Vuelos

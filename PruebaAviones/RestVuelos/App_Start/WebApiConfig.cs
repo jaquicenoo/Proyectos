@@ -30,6 +30,16 @@ namespace RestVuelos
                 defaults: new { controller = "Vuelos", action = "GetAllVuelos"}
              );
             config.Routes.MapHttpRoute(
+                name: "PostVuelos",
+                routeTemplate: "api/Vuelos/PostVuelos",
+                defaults: new { controller = "Vuelos", action = "PostVuelos" }
+            );
+            config.Routes.MapHttpRoute(
+                name: "PutVuelos",
+                routeTemplate: "api/Vuelos/PutVuelos",
+                defaults: new { controller = "Vuelos", action = "PutVuelos" }
+            );
+            config.Routes.MapHttpRoute(
                 name: "GetVuelo",
                 routeTemplate: "api/Vuelos/GetVuelo/{id}",
                 defaults: new { controller = "Vuelos", action = "GetVuelo", id = RouteParameter.Optional }
@@ -43,6 +53,11 @@ namespace RestVuelos
                 name: "GetAllCiudades",
                 routeTemplate: "api/Vuelos/GetAllCiudades",
                 defaults: new { controller = "Vuelos", action = "GetAllCiudades" }
+            );
+            config.Routes.MapHttpRoute(
+                name: "GetAllEstados",
+                routeTemplate: "api/Vuelos/GetAllEstados",
+                defaults: new { controller = "Vuelos", action = "GetAllEstados" }
             );
         }
     }

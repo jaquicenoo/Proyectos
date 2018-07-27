@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Vuelo", "NuevoVuelo")
 </p>
 <table class="table">
     <tr>
@@ -33,38 +33,54 @@
         <th>
             @Html.DisplayNameFor(model => model.NombreAerolinea)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreEstado)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroVuelo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CiudadOrigen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CiudadDestino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoraSalida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoraLlegada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreAerolinea)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.IdRegistro }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroVuelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CiudadOrigen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CiudadDestino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraSalida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraLlegada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreAerolinea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEstado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.IdRegistro }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}

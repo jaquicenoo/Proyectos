@@ -116,6 +116,7 @@
     <Property Name="HoraLlegada" Type="Time" Nullable="false" Precision="7" />
     <Property Name="NombreAerolinea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="TipoVuelo" Type="Boolean" Nullable="false" />
+    <Property Name="NombreEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
