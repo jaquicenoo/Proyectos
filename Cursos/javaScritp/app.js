@@ -13,3 +13,7 @@ var obj ={
         texto:"texto dos"
     }
 };
+function primeraFuncion(){
+    var a = 20;
+    console.log(a);
+}

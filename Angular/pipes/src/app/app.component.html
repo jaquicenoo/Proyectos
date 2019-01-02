@@ -1,0 +1,117 @@
+<div class="container">
+    <br>
+    <h1>Pipes</h1>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Pipe</th>
+                <th scope="col">Producto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{nombre}}</td>
+                <td>uppercase</td>
+                <td>{{nombre | uppercase}}</td>
+            </tr>
+            <tr>
+                <td>{{nombre}}</td>
+                <td>lowercase</td>
+                <td>{{nombre | lowercase}}</td>
+            </tr>
+            <tr>
+                <td>{{nombre}}</td>
+                <td>slice:3</td>
+                <td>{{nombre | slice:3}}</td>
+            </tr>
+            <tr>
+                <td>{{nombre}}</td>
+                <td>slice:0:3</td>
+                <td>{{nombre | slice:0:3}}</td>
+            </tr>
+            <tr>
+                <td>{{arreglo}}</td>
+                <td>slice:0:3</td>
+                <td>{{arreglo | slice:2:5}}</td>
+            </tr>
+            <tr>
+                <td>{{PI}}</td>
+                <td>number:'1.0-5'</td>
+                <td>{{PI | number:'1.0-5'}}</td>
+            </tr>
+            <tr>
+                <td>{{a}}</td>
+                <td>percent</td>
+                <td>{{a | percent}}</td>
+            </tr>
+            <tr>
+                <td>{{a}}</td>
+                <td>percent:'2.2-2'</td>
+                <td>{{a | percent:'2.2-2'}}</td>
+            </tr>
+            <tr>
+                <td>{{salario}}</td>
+                <td>currency</td>
+                <td>{{salario | currency}}</td>
+            </tr>
+            <tr>
+                <td>{{salario}}</td>
+                <td>currency:'EUR'</td>
+                <td>{{salario | currency:'EUR'}}</td>
+            </tr>
+            <tr>
+                <td>{{salario}}</td>
+                <td>currency:'EUR':true:'4.0-0'</td>
+                <td>{{salario | currency:'EUR':true:'4.0-0'}}</td>
+            </tr>
+            <tr>
+                <td>{{heroe}}</td>
+                <td>json</td>
+                <td><pre>{{heroe | json}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{valorPromesa}}</td>
+                <td>async</td>
+                <td><pre>{{valorPromesa | async}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{fecha}}</td>
+                <td>date</td>
+                <td><pre>{{fecha | date}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{fecha}}</td>
+                <td>date:'medium'</td>
+                <td><pre>{{fecha | date:'medium'}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{fecha}}</td>
+                <td>date</td>
+                <td><pre>{{fecha | date:'MMMM - d'}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{nombre2}}</td>
+                <td>capitalizado</td>
+                <td><pre>{{nombre2 | capitalizado}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{nombre2}}</td>
+                <td>capitalizado:false</td>
+                <td><pre>{{nombre2 | capitalizado:false}}</pre></td>
+            </tr>
+            <tr>
+                <td>{{nombre}}</td>
+                <td>contraseña:true</td>
+                <td><pre>{{nombre | contrasena:true}}</pre></td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Slice</h4>
+    <ul>
+        <li *ngFor="let item of arreglo | slice:3:20">{{item}}</li>
+    </ul>
+    <h4>Video</h4>
+    <iframe width="640" height="360" [src]="video | domseguro:'https://www.youtube.com/embed/'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>''

@@ -1,0 +1,28 @@
+<div class="d-flex flex-column bd-highlight mb-3">
+    <div class="p-0 bd-highlight " *ngFor="let hour of initialDate">
+        <div class="d-flex" style="height: 90px;">
+            <div class="p-1 flex-shrink-1 o-position">{{hour.format('HH:mm')}}</div>
+            <div class="p-1 border border-secondary justify-content-start" style="width: 95%;z-index: 0">
+                <div class="o-event d-flex" *ngFor="let cite of getCitesByHour(hour)">
+                    <div class="flex-fill op-2">
+                        <p class='o-text'>
+                            {{cite.patient.name}}<br>Procedimiento: {{cite.patient.procedure}}<br>Hora inicio: {{cite.date.format('HH mm')}}</p>
+                    </div>
+                    <div class="flex-fill op-2">
+                        <p class="o-text">
+                            C.C {{cite.patient.identification}}<br>Eps {{cite.patient.eps}}
+                        </p>
+                    </div>
+                    <div class="flex-fill op-2">
+                        <p class="o-text">
+                            Edad {{cite.patient.edad}}<br>Años Consultorio 202
+                        </p>
+                    </div>
+                    <div class="flex-fill op-2 justify-content-center align-self-center">
+                        <img class="o-img" src="assets/img/Duracion.png"> {{cite.date.format('HH mm')}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

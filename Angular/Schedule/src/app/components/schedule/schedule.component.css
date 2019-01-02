@@ -1,0 +1,47 @@
+.o-border {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+}
+
+.d-border {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.o-position {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    padding-top: 0px !important;
+}
+
+.o-img {
+    width: 40px;
+    height: 40px;
+    padding: auto;
+}
+
+.o-event {
+    padding: 2px 10px;
+    width: 70%;
+    border-left: 10px solid yellowgreen;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    min-height: 60px;
+    background-color: white;
+    z-index: 1;
+    position: absolute;
+}
+
+.o-text {
+    text-align: left;
+    font-size: 12px;
+    margin: 0px;
+}
+
+.op-2 {
+    padding: 0px 2px;
+}
