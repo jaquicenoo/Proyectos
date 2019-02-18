@@ -1,0 +1,67 @@
+.scse-form-group {
+  position: relative;
+  padding-top: 16px;
+  margin-bottom: 16px;
+}
+.scse-form-group select + .animated-label {
+  width: fit-content;
+}
+.scse-form-group .animated-label {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  font-weight: 300;
+  opacity: 0.5;
+  cursor: text;
+  transition: 0.2s ease all;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.scse-form-group .animated-label:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  height: 2px;
+  width: 10px;
+  visibility: hidden;
+  background-color: #c44a4a;
+  transition: 0.2s ease all;
+}
+.scse-form-group.not-empty .animated-label {
+  top: 0;
+  font-size: 12px;
+}
+.scse-form-group .scse-form-control {
+  width: 100%;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 0;
+  border-width: 0 0 1px;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  height: auto;
+  padding: 3px 0 5px;
+}
+.scse-form-group .scse-form-control:focus:not(.select), .scse-form-group .scse-form-control:valid:not(.select) {
+  box-shadow: none;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+.scse-form-group .scse-form-control:focus:not(.select) ~ .animated-label, .scse-form-group .scse-form-control:valid:not(.select) ~ .animated-label {
+  top: 0;
+  opacity: 1;
+  color: #979494;
+  font-size: 12px;
+}
+.scse-form-group .scse-form-control.invalid ~ .animated-label::after {
+  visibility: visible;
+  width: 100%;
+  left: 0;
+}
+
+/*# sourceMappingURL=stylos.css.map */

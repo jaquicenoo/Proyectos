@@ -1,3 +1,21 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="scse-form-group">
+                <input class="scse-form-control" type="text" id="name" (blur)="blur($event)" required>
+                <label class="animated-label" for="name">Name</label>
+            </div>
+            <div class="scse-form-group">
+                <select name="select" class="scse-form-control select" (change)="change($event)">
+                            <option value="value1"></option> 
+                            <option value="value2">Value 2</option>
+                            <option value="value3">Value 3</option>
+                </select>
+                <label class="animated-label" for="password">Password</label>
+            </div>
+        </div>
+    </div>
+</div>
 <div [ngClass]="alert" class="alert" role="alert">
     A simple primary alert—check it out!
 </div>
